@@ -16,6 +16,7 @@ import numpy as np
 ```
 @Pyodide.eval
 
+See on LiaScript: https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/IntroductionToNumpy.md
 
 ## What is NumPy?
 
