@@ -103,7 +103,7 @@ print ("E=\n",E)
 
 ### Create x
 
---{{0}}--
+    --{{0}}--
 Let's imagine you have to plot a function f(x). To plot that Python needs
 points. So first we create an array consisting of x.
 
