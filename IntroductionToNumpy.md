@@ -102,8 +102,10 @@ print ("E=\n",E)
 ## Functions evaluation with arrays
 
 ### Create x
+
 --{{0}}--
-Let's imagine you have to plot a function f(x). To plot that Python needs points. So first we create an array consisting of x.
+Let's imagine you have to plot a function f(x). To plot that Python needs
+points. So first we create an array consisting of x.
 
 ```python
 #np.arange(startpoint, endpoint, stepsize)
@@ -164,7 +166,7 @@ plot(fig2)
 
 ## Combining commands
 
---{{0}}--
+    --{{0}}--
 It is also possible to combine different commands. For example you can create a
 matrix out of a set of ordered numbers.
 
