@@ -19,10 +19,6 @@ import numpy as np
 
 ## What is NumPy?
 
-* NumPy = numerical Python (working with multidimensional array objects)
-* NumPy + SciPy + Matplotlib = replacement for MATLAB
-
-
     --{{0}}--
 NumPy means numerical python. It is made to work with multidimensional array
 objects, such as matrices and vectors. And there is a collection of operations
@@ -36,6 +32,9 @@ python) and Matplotlib, you get a functional opportunity to replace MATLAB.
 Python doesn't distinguish between vectors and matrices. They both are just
 arrays having different dimensions.
 
+
+* NumPy = numerical Python (working with multidimensional array objects)
+* NumPy + SciPy + Matplotlib = replacement for MATLAB
 
 ## Basics
 
