@@ -188,7 +188,7 @@ The table represents our grayscale image. Each field is one pixel marked with "p
 
 ### Filter mask
 --{{0}}--
-You see the rectangle marked by an "k" in every field. That is our filter mask or kernel. That is normally a square with an odd side length. Why odd? Because we want easily work with integers.
+You see the rectangle marked by an "k" in every field. That is our filter mask or kernel. That is normally a square with an odd side length. Why odd? Because we want to work easily with integers.
 
 | p | p | p | p | p | p |
 | k | k | k | p | p | p |
