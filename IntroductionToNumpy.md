@@ -222,7 +222,7 @@ print (AplusB)
 
 ### Some mathematical operations with matrices
 
-Again we take our matrix `F`.
+Again we take our matrix F.
 
 ```python
 print (F)
