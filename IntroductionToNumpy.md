@@ -123,7 +123,7 @@ x2 = np.linspace( 0, 2*pi, 100 )
 f1 = np.sin(x2)
 print ("f1", f1)
 
-f2 = x1*x1
+f2 = x1**2
 print ("f2", f2)
 ```
 @Pyodide.eval
