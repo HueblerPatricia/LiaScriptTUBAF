@@ -216,6 +216,7 @@ print (sqrtA)
 B = np.array([2., 0., -1.])
 AplusB = np.add(A, B)
 print (AplusB)
+
 ```
 @Pyodide.eval
 
