@@ -53,7 +53,7 @@ a.dtype
 
     --{{0}}--
 The data type is chosen automatically. But sometimes that will not be what you
-need, so you can do this yourself. See beyond.
+need, so you can do this yourself. See below.
 
       {{1}}
 ```python
