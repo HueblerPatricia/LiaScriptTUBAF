@@ -254,10 +254,9 @@ for column in F.T:  # iterating over rows in transposed matrix
 ```
 @Pyodide.eval
 
-    --{{2}}--
 > **Remark:** It doesn't make any difference whether you call those indices `row`,
-`column` or just `i`, `j`, `index` or somehow else. They are just indices,
-variables if you want.
+> `column` or just `i`, `j`, `index` or somehow else. They are just indices,
+> variables if you want.
 
 #### Matrix multiplication
 
