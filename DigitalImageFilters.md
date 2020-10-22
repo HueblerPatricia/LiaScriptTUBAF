@@ -116,7 +116,7 @@ plt.imshow(pict)
 plt.show()
 ```
 
-Normally you could use the commands above, but again we are in LiaScript, so use the lines beyond!
+Normally you could use the commands above, but again we are in LiaScript, so use the lines below!
 
 ```python
 fig, ax = plt.subplots()
@@ -129,7 +129,7 @@ plot(fig)
 
 ### Shades of gray
 --{{0}}--
-You may do all following computations with all three color layers or you may convert your picture to grayscale.
+You may do all following computations with all three color layers or you may convert your picture into grayscale.
 
 Normally you would have another ready implemented function for this and could use the following code:
 
