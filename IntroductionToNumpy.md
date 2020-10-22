@@ -322,3 +322,7 @@ x = la.solve(AdotB,vec_b)
 print (x)
 ```
 @Pyodide.eval
+
+## Some additional words
+
+There are far more possibilities with NumPy, SciPy, Pandas and other modules. Feel free to check out things in this basic script and have a look into the Python documentation. There is nearly always a solution for any problem.
