@@ -13,7 +13,9 @@ import:  https://github.com/LiaTemplates/Pyodide
 
 See on LiaScript:
 
-https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalImageFilters.md
+
+ https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalImageFilters.md
+ 
  
 ## Goals and fields of application
 | goals                  | fields               |
