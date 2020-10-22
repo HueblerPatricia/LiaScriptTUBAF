@@ -90,7 +90,7 @@ For example in the following ways.
 ```python
 D = np.zeros((2,3), dtype=np.int16 )
 print ("D=\n",D)
-E = np.zeros ((2,3))
+E = np.zeros((2,3))
 print ("E=\n",E)
 ```
 @Pyodide.eval
