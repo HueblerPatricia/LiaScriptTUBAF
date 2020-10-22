@@ -154,7 +154,7 @@ def rgb2gray(rgb):
 ```
 @Pyodide.eval
 
-Remark: You may also change the weights for the 3 colors. Those above were taken from Wikipedia (https://de.wikipedia.org/wiki/Grauwert).
+> **Remark:** You may also change the weights for the 3 colors. Those above were taken from Wikipedia (https://de.wikipedia.org/wiki/Grauwert).
 
 Now the computation:
 
@@ -229,7 +229,7 @@ def convolve(kernel,pictpart):
 @Pyodide.eval
 
 ## One example of linear image filters
-Remark: All following examples are ready implemented in "OpenCV". (see https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_filtering/py_filtering.html). Here working on rgb pictures is as easy as working on grayscale images.
+> **Remark:** All following examples are ready implemented in "OpenCV". (see https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_filtering/py_filtering.html). Here working on rgb pictures is as easy as working on grayscale images.
 
 ### Average filter
 The kernel is a square nxn and all entries are of the same weight.
