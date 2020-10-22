@@ -169,6 +169,7 @@ plot(fig)
 You see, the more subdivisions we perform, the better the integral becomes. That means numerical integration by using the trapezoidal rule. And now let's have a look at a possible implementation.
 
 ## The trapezoidal rule in Python
+
 --{{0}}--
 How to check, whether our implementation will be correct?
 First, take a function with a known integral. For example the integral from zero to one over the derivative of the arctangent.
