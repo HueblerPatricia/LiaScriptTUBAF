@@ -357,4 +357,5 @@ kernel = create_gaussiankernel(5,5)
 
 ## Further ideas
 By unsharp masking we have sharpened the edges but lost contrast. We could go on with some histogram modification to improve our "masked" image.
-Remark: Als implemented in OpenCV. See https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_histograms/py_histogram_equalization/py_histogram_equalization.html#histogram-equalization
+
+> **Remark:** Als implemented in OpenCV. See https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_histograms/py_histogram_equalization/py_histogram_equalization.html#histogram-equalization
