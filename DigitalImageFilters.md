@@ -12,7 +12,8 @@ import:  https://github.com/LiaTemplates/Pyodide
 # The basics of digital image filters in Python 3
 
 See on LiaScript:
- https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalImageFilters.md
+
+https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalImageFilters.md
  
 ## Goals and fields of application
 | goals                  | fields               |
