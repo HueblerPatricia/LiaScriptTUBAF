@@ -20,10 +20,6 @@ See on LiaScript:
 
 https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/IntroductionToNumpy.md
 
-See on GitHub:
-
-https://github.com/HueblerPatricia/LiaScriptTUBAF/blob/main/IntroductionToNumpy.md
-
 ## What is NumPy?
 
     --{{0}}--
