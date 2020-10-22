@@ -25,13 +25,9 @@ https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPat
     --{{0}}--
 NumPy means numerical python. It is made to work with multidimensional array
 objects, such as matrices and vectors. And there is a collection of operations
-for working with these objects.
-
-    --{{0}}--
-When you use NumPy together with the packages SciPy (which means scientific
+for working with these objects. When you use NumPy together with the packages SciPy (which means scientific
 python) and Matplotlib, you get a functional opportunity to replace MATLAB.
 
-    --{{0}}--
 Python doesn't distinguish between vectors and matrices. They both are just
 arrays having different dimensions.
 
