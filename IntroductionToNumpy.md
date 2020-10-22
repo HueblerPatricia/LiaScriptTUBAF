@@ -63,7 +63,7 @@ C.dtype
 
     --{{1}}--
 You can choose between all Python data types, such as integer, float, boolean,
-single characters, complex numbers or otheres (see Python documentation for
+single characters, complex numbers or others (see Python documentation for
 this).
 
 ### Matrix creation with known entries
