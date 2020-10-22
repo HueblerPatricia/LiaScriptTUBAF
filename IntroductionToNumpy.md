@@ -29,7 +29,7 @@ for working with these objects. When you use NumPy together with the packages Sc
 python) and Matplotlib, you get a functional opportunity to replace MATLAB.
 
 * NumPy = numerical Python (working with multidimensional array objects)
-* NumPy + SciPy + Matplotlib = replacement for MATLAB
+- NumPy + SciPy + Matplotlib = replacement for MATLAB
 
 Remark: Referring to array objects Python doesn't distinguish between vectors and matrices. They both are just arrays having different dimensions.
 
