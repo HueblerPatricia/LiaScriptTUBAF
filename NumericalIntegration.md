@@ -221,6 +221,7 @@ def f(x):
     '''
     y = 1 / (1 + x*x)
     return y  
+    
 ```
 @Pyodide.eval
 
@@ -290,6 +291,7 @@ ax.set_xlabel("number of subdivisions")
 ax.set_ylabel("error")
 plt.show()
 plot(fig)
+
 ```
 @Pyodide.eval
 
@@ -332,6 +334,7 @@ def trapz(f,a,b,N=50):
     dx = (b - a)/N
     T = (dx/2) * np.sum(y_right + y_left)
     return T
+    
 ```
 @Pyodide.eval
 
@@ -380,6 +383,7 @@ def simps(f,a,b,N=50):
     y = f(x)
     S = dx/3 * np.sum(y[0:-1:2] + 4*y[1::2] + y[2::2])
     return S
+    
 ```
 @Pyodide.eval
 
