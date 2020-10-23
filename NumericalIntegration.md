@@ -37,19 +37,20 @@ So the only opportunity is to calculate the integral numerically.
 ## Newton-Cotes-formulas
 The Newton-Cotes-formulas are a common and easy possibility to solve our problem numerically:
 
-$I \approx \dfrac{b-a}{n}\cdot \sum_{n=0}^N \alpha_{j}^{(n)} f(a+jh)$
+$I \approx Q_{n+1}[f] = \dfrac{b-a}{n}\cdot \sum_{i=0}^n \alpha_{i} f(x_{i}) = h\cdot \sum_{i=0}^n \alpha_{i} f(x_{i})$
 
 What do the variables mean?
 | variable           | meaning                                |
 |--------------------|----------------------------------------|
-| I                  | integral                               |
-| a                  | lower integration boundary             |
-| b                  | upper integration boundary             |
-| n                  | number of subdivisions of the interval |
-| $\alpha_{j}^{(n)}$ | Newton-Cotes-weights (see below)       |
-| f                  | given function                         |
-| h                  | step size: $h = \dfrac{b-a}{n}$        |
-| j                  | number with $ (j = 0, 1, ..., n) $     |
+| $I$                | integral                               |
+| $Q_{n+1}[f]$       | Newton-Cotes-rule                      |
+| $a$                | lower integration boundary             |
+| $b$                | upper integration boundary             |
+| $n$                | number of subdivisions of the interval |
+| $\alpha_{i}$       | Newton-Cotes-weights (see below)       |
+| $f$                | given function                         |
+| $h$                | step size: $h = \dfrac{b-a}{n}$        |
+| $i$                | number with $ (i = 0, 1, ..., n) $     |
 
 Newton-Cotes-weights
 | n   | name             | nodes in x | weights                                                                              |
@@ -58,6 +59,10 @@ Newton-Cotes-weights
 | 2   | Simpson-rule     | 0 $\dfrac{1}{2}$  1 | $\dfrac{1}{3}$ $\dfrac{4}{3}$ $\dfrac{1}{3}$                                |
 | 3   | 3/8-rule         | 0 $\dfrac{1}{3}$  $\dfrac{2}{3}$  1 | $\dfrac{3}{8}$ $\dfrac{9}{8}$ $\dfrac{9}{8}$ $\dfrac{3}{8}$ |
 | ... |                  |                                                                                                   |
+
+> **Remark:** Already implemented in SciPy. But if you really want to understand, what the formulas do, do it yourself!
+
+(source: Meister, Andreas u. Sonar, Thomas: Numerik. Eine lebendige und gut verständliche Einführung mit vielen Beispielen. Springer-Verlag GmbH Deutschland, 2019)
 
 ## The trapezoidal rule - first some preparation
 Some Python modules to work with ...
@@ -168,8 +173,7 @@ plot(fig)
 --{{0}}--
 You see, the more subdivisions we perform, the better the integral becomes. That means numerical integration by using the trapezoidal rule. And now let's have a look at a possible implementation.
 
-## The trapezoidal rule in Python
-
+## The trapezoidal rule in Python based on the graphical imagination
 --{{0}}--
 How to check, whether our implementation will be correct?
 First, take a function with a known integral. For example the integral from zero to one over the derivative of the arctangent.
@@ -183,10 +187,40 @@ def TrapeziumSurface( a,c,h ):
     A = 0.0
     A = 0.5 * ( a + c ) * h
     return A
+    '''Gives the surface of a trapezium
+
+    Parameters
+    ----------
+    a : number
+        length of one of the parallel sides
+    c : number
+        length of the side parallel to a
+    h : number
+        distance between a and c
+
+    Returns
+    -------
+    float
+        the surface of the trapezium defined by the parameters
+
+    '''
 
 def f(x):
     y = 1 / (1 + x*x)
     return y  
+    '''Evaluates the formula inside
+
+    Parameters
+    ----------
+    x : number
+        your x values
+
+    Returns
+    -------
+    float
+        calculates y for x from the given formula
+
+    '''
 ```
 @Pyodide.eval
 
@@ -219,7 +253,7 @@ print ("The error is: ", (np.pi - pi_comp))
 
 Try some different dx or boundaries to get a feeling of how the process works! Or have a look at the errors as function of the number of subdivisions on the next slide...
 
-## Errors depending on subdivisions
+### Errors depending on subdivisions
 ```python
 #boundaries:
 a = 0.0
@@ -260,6 +294,104 @@ plot(fig)
 @Pyodide.eval
 
 Theoretically this should be a smooth graph. The peaks are a result of the smallest printable number on a computer. You should always think about this effect, because it is very hard or even impossible to get rid of it.
+
+## The trapezoidal rule in Python based on formulas
+
+--{{0}}--
+So now it is clear what we want to do. But there is a much shorter way.
+
+Formula for the trapezoidal rule:
+
+$F_{N}(f) = \dfrac{\Delta x}{2}\cdot \sum_{i=1}^{N}(f(x_{i}) + f(x_{i-1}))$
+
+And now we do implement exactly the formula above.
+
+```python
+def trapz(f,a,b,N=50):
+    '''Approximate the integral of f(x) from a to b by the trapezoid rule.
+
+    Parameters
+    ----------
+    f : function
+        Vectorized function of a single variable
+    a , b : numbers
+        Interval of integration [a,b]
+    N : integer
+        Number of subintervals of [a,b]; 50 by default
+
+    Returns
+    -------
+    float
+        Approximation of the integral of f(x) from a to b using the
+        trapezoid rule with N subintervals of equal length.
+    '''
+    x = np.linspace(a,b,N+1) # N+1 points make N subintervals
+    y = f(x)
+    y_right = y[1:] # right endpoints
+    y_left = y[:-1] # left endpoints
+    dx = (b - a)/N
+    T = (dx/2) * np.sum(y_right + y_left)
+    return T
+```
+@Pyodide.eval
+
+And now let's try it out:
+
+```python
+result = trapz(np.sin,0,np.pi/2,1000)
+print(result)
+```
+@Pyodide.eval
+
+(source for formula and source code: https://www.math.ubc.ca/~pwalls/math-python/integration/trapezoid-rule/)
+
+
+## Simpson's rule
+And when you get how the trapezoidal rule works, you can try Simpson's rule.
+
+Formula for Simpson's rule:
+
+$S_{N}(f) = \dfrac{\Delta x}{3}\cdot \sum_{i=1}^{N/2}(f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))$
+
+```python
+def simps(f,a,b,N=50):
+    '''Approximate the integral of f(x) from a to b by Simpson's rule.
+
+    Parameters
+    ----------
+    f : function
+        Vectorized function of a single variable
+    a , b : numbers
+        Interval of integration [a,b]
+    N : (even) integer
+        Number of subintervals of [a,b]; by default 50
+
+    Returns
+    -------
+    float
+        Approximation of the integral of f(x) from a to b using
+        Simpson's rule with N subintervals of equal length.
+    '''
+    if N % 2 == 1:
+        raise ValueError("N must be an even integer.")
+    dx = (b-a)/N
+    x = np.linspace(a,b,N+1)
+    y = f(x)
+    S = dx/3 * np.sum(y[0:-1:2] + 4*y[1::2] + y[2::2])
+    return S
+```
+@Pyodide.eval
+
+A test:
+
+```python
+result = simps(np.sin,0,np.pi/2,100)
+print(result)
+```
+@Pyodide.eval
+
+(source for formula and cource code: https://www.math.ubc.ca/~pwalls/math-python/integration/simpsons-rule/)
+
 
 ## Some additional words
 
