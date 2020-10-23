@@ -184,9 +184,6 @@ Some important functions:
 
 ```python
 def TrapeziumSurface( a,c,h ):
-    A = 0.0
-    A = 0.5 * ( a + c ) * h
-    return A
     '''Gives the surface of a trapezium
 
     Parameters
@@ -204,10 +201,11 @@ def TrapeziumSurface( a,c,h ):
         the surface of the trapezium defined by the parameters
 
     '''
+    A = 0.0
+    A = 0.5 * ( a + c ) * h
+    return A
 
 def f(x):
-    y = 1 / (1 + x*x)
-    return y  
     '''Evaluates the formula inside
 
     Parameters
@@ -221,6 +219,8 @@ def f(x):
         calculates y for x from the given formula
 
     '''
+    y = 1 / (1 + x*x)
+    return y  
 ```
 @Pyodide.eval
 
