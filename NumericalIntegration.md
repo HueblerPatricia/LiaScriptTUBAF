@@ -345,6 +345,7 @@ print(result)
 
 (source for formula and source code: https://www.math.ubc.ca/~pwalls/math-python/integration/trapezoid-rule/)
 
+> **Remark:** ready implemented in scipy.integrate.trapz (see Python documentation for details)
 
 ## Simpson's rule
 And when you get how the trapezoidal rule works, you can try Simpson's rule.
@@ -392,6 +393,7 @@ print(result)
 
 (source for formula and cource code: https://www.math.ubc.ca/~pwalls/math-python/integration/simpsons-rule/)
 
+> **Remark:** ready implemented in "scipy.integrate.simps" (see Python documentation for details)
 
 ## Some additional words
 
