@@ -77,20 +77,20 @@ Now we create an array with 3 color layers. You can take this example, play with
 ```python
 def rotateList(lst, rot):
     
-        '''Rotates a given list 
+    '''Rotates a given list 
     
-        Parameters
-        ----------
-        lst : list
-            list with entries of any data type
-        rot : integer
-            number of entries for the list to be rotated
+    Parameters
+    ----------
+    lst : list
+        list with entries of any data type
+    rot : integer
+        number of entries for the list to be rotated
     
-        Returns
-        -------
-        list
-            the rotated list
-        '''
+    Returns
+    -------
+    list
+        the rotated list
+    '''
     l2 = lst[rot:] + lst[:rot]
     return l2
 
@@ -119,8 +119,7 @@ for lines in range(0,len(colorList)):
     lsta += squareLen
     lstp += squareLen
     colorList = rotateList(colorList,-2)
-
-
+    
 ```
 @Pyodide.eval
 
@@ -165,18 +164,18 @@ But LiaScript doesn't know the module "skimage", so let's write our own function
 ```python
 def rgb2gray(rgb):
     
-        '''Converts an rgb pixel into grayscale
-    
-        Parameters
-        ----------
-        rgb : array
-            a pixel with 3 color layers
-    
-        Returns
-        -------
-        float
-            the grayscale value for the given rgb
-        '''
+    '''Converts an rgb pixel into grayscale
+
+    Parameters
+    ----------
+    rgb : array
+        a pixel with 3 color layers
+
+    Returns
+    -------
+    float
+        the grayscale value for the given rgb
+    '''
         
     r, g, b = rgb[:,:,0], rgb[:,:,1], rgb[:,:,2]
     gray = 0.2989 * r + 0.5870 * g + 0.1140 * b
@@ -251,28 +250,29 @@ Translated into Python:
 ```python
 def convolve(kernel,pictpart):
     
-        '''Performs a convolution in 2D
+    '''Performs a convolution in 2D
 
-          does a pointwise multiplication of "kernel" and "pictpart" and computes the sum over the result
-    
-        Parameters
-        ----------
-        kernel : 2D array 
-            the filter mask
-        pictpart : 2D
-            the actual part of the picture to be convolved
-    
-        Returns
-        -------
-        float
-            the sum over the multiplication's result
-        '''
+      does a pointwise multiplication of "kernel" and "pictpart" and computes the sum over the result
+
+    Parameters
+    ----------
+    kernel : 2D array 
+        the filter mask
+    pictpart : 2D
+        the actual part of the picture to be convolved
+
+    Returns
+    -------
+    float
+        the sum over the multiplication's result
+    '''
         
     s = 0.0
     temporal_array = np.multiply(kernel,pictpart)
     s = sum(temporal_array)
     s = sum(s)
     return s
+    
 ```
 @Pyodide.eval
 
@@ -391,20 +391,20 @@ This one works like the average filter. It's only difference is the kernel. Here
 ```python
 def create_gaussiankernel(side=5, sigma=1):
     
-        '''creates a Gaussian kernel in 2D for image filtering
-    
-        Parameters
-        ----------
-        side : integer
-            length of one side of the square that will be the kernel
-        sigma : number
-            some expression of the filter's strength
-    
-        Returns
-        -------
-        2D array
-            the ready and normed kernel
-        '''
+    '''creates a Gaussian kernel in 2D for image filtering
+
+    Parameters
+    ----------
+    side : integer
+        length of one side of the square that will be the kernel
+    sigma : number
+        some expression of the filter's strength
+
+    Returns
+    -------
+    2D array
+        the ready and normed kernel
+    '''
     ax = np.arange(-side // 2 + 1., side // 2 + 1.)
     xx, yy = np.meshgrid(ax, ax)
     kernel = np.exp(-0.5 * (np.square(xx) + np.square(yy)) / np.square(sigma))
