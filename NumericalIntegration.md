@@ -178,7 +178,7 @@ You see, the more subdivisions we perform, the better the integral becomes. That
 How to check, whether our implementation will be correct?
 First, take a function with a known integral. For example the integral from zero to one over the derivative of the arctangent.
 
-$\int_{0}^{1} \dfrac{1}{1+x^2} \,dx = arctan(1) - arctan(0) = \dfrac{1}{4} \pi$
+$\Large\int_{0}^{1} \normalsize\dfrac{1}{1+x^2} \,dx = arctan(1) - arctan(0) = \dfrac{1}{4} \pi$
 
 Some important functions:
 
@@ -304,7 +304,7 @@ So now it is clear what we want to do. But there is a much shorter way.
 
 Formula for the trapezoidal rule:
 
-$F_{N}(f) = \dfrac{\Delta x}{2}\cdot \sum_{i=1}^{N}(f(x_{i}) + f(x_{i-1}))$
+$F_{N}(f) = \dfrac{\Delta x}{2}\cdot \Large\sum_{i=1}^{N}\normalsize (f(x_{i}) + f(x_{i-1}))$
 
 And now we do implement exactly the formula above.
 
@@ -355,7 +355,7 @@ And when you get how the trapezoidal rule works, you can try Simpson's rule.
 
 Formula for Simpson's rule:
 
-$S_{N}(f) = \dfrac{\Delta x}{3}\cdot \sum_{i=1}^{N/2}(f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))$
+$S_{N}(f) = \dfrac{\Delta x}{3}\cdot \Large\sum_{i=1}^{N/2}\normalsize (f(x_{2i-2}) + 4f(x_{2i-1}) + f(x_{2i}))$
 
 ```python
 def simps(f,a,b,N=50):
