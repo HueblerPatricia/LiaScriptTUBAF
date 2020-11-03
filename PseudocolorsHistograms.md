@@ -548,6 +548,8 @@ plot(fig)
 ```
 @Pyodide.eval
 
+********************************************************
+
 ### Comparison of all histograms
 
 --{{0}}--
