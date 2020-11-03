@@ -9,7 +9,7 @@ language: en
 import:  https://github.com/LiaTemplates/Pyodide
 -->
 
-# The basics of digital image filters in Python 3
+# Digital image processing in Python 3 - part I: digital image filters
 
 See on LiaScript:
 
