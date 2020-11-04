@@ -341,6 +341,8 @@ What do the variables mean?
 | $N$      | picture's column dimension             |
 | $n_{i}$  | total count of pixels of one color     |
 
+source of formula: Gonzalez, Woods: Digital Image Processing. Third Edition. PHI Learning Private Limited. New Delhi 2008, page 126
+
 #### Function for histogram equalization
 
 ```python
@@ -433,7 +435,7 @@ Now we see that the colors are more equally distributed. In fact that works bett
 ### Histogram spreading
 
 --{{0}}--
-Histogram spreading is another method for increasing contrast. Here we define an interval of colors and spread them up into the whole grayscale values from zero to two hundred fifty five. Within this method it is possible to loose the colors out of the defined interval. This method is suitable for making very low color differences visible.
+Histogram spreading is another method for increasing contrast. Here we define an interval of colors and spread them up into the whole grayscale values from zero to two hundred fifty five. Within this method we don't change any possibility for a color occurring, we just shift the color values.
 
 #### Another test image
 
@@ -470,6 +472,7 @@ plot(fig)
 
 ```
 @Pyodide.eval
+
 *******************************************************
 
 #### Histogram spreading explained
@@ -563,6 +566,8 @@ flatspread = gray_spread.flatten()
 
   {{1}}
 **************************************************
+--{{1}}--
+You see that histogram spreading works fine while equalization does not really what we imagined. But that is no problem of the function but of our picture only consisting of few colors.
 
 ```python
 
@@ -588,7 +593,222 @@ plot(fig)
 
 **************************************************
 
+### Better example for histogram equalization
+
+--{{0}}--
+On the following slides we will see the same process of histogram equalization but with a different picture. So let's do the familiar processes quickly.
+
+```python
+gray0   = [0  ,0  ,0  ]
+gray1   = [10 ,10 ,10 ]
+gray2   = [20 ,20 ,20 ]
+gray3   = [30 ,30 ,30 ]
+gray4   = [40 ,40 ,40 ]
+gray5   = [50 ,50 ,50 ]
+gray6   = [60 ,60 ,60 ]
+gray7   = [70 ,70 ,70 ]
+gray8   = [80 ,80 ,80 ]
+gray85  = [85 ,85 ,85 ]
+gray9   = [90 ,90 ,90 ]
+gray95  = [95 ,95 ,95 ]
+gray10  = [100,100,100]
+gray102 = [102,102,102]
+gray105 = [105,105,105]
+gray107 = [107,107,107]
+gray11  = [110,110,110]
+gray112 = [112,112,112]
+gray114 = [114,114,114]
+gray115 = [115,115,115]
+gray116 = [116,116,116]
+gray117 = [117,117,117]
+gray118 = [118,118,118]
+gray119 = [119,119,119]
+gray12  = [120,120,120]
+gray121 = [121,121,121]
+gray122 = [122,122,122]
+gray123 = [123,123,123]
+gray124 = [124,124,124]
+gray125 = [125,125,125]
+gray126 = [126,126,126]
+gray127 = [127,127,127]
+gray128 = [128,128,128]
+gray129 = [129,129,129]
+gray13  = [130,130,130]
+gray131 = [131,131,131]
+gray132 = [132,132,132]
+gray135 = [135,135,135]
+gray137 = [137,137,137]
+gray14  = [140,140,140]
+gray142 = [142,142,142]
+gray145 = [145,145,145]
+gray15  = [150,150,150]
+gray155 = [155,155,155]
+gray16  = [160,160,160]
+gray165 = [165,165,165]
+gray17  = [170,170,170]
+gray18  = [180,180,180]
+gray19  = [190,190,190]
+gray20  = [200,200,200]
+gray21  = [210,210,210]
+gray22  = [220,220,220]
+gray23  = [230,230,230]
+gray24  = [240,240,240]
+gray25  = [250,250,250]
+
+colorList_gray = [gray0,
+                  gray1,
+                  gray2,
+                  gray3,
+                  gray4,
+                  gray5,
+                  gray6,
+                  gray7,
+                  gray8,
+                  gray85,
+                  gray9,
+                  gray95,
+                  gray10,
+                  gray102,
+                  gray105,
+                  gray107,
+                  gray11,
+                  gray112,
+                  gray114,
+                  gray115,
+                  gray116,
+                  gray117,
+                  gray118,
+                  gray119,
+                  gray12,
+                  gray121,
+                  gray122,
+                  gray123,
+                  gray124,
+                  gray125,
+                  gray126,
+                  gray127,
+                  gray128,
+                  gray129,
+                  gray13,
+                  gray131,
+                  gray132,
+                  gray135,
+                  gray137,
+                  gray14,
+                  gray142,
+                  gray145,
+                  gray15,
+                  gray155,
+                  gray16,
+                  gray165,
+                  gray17,
+                  gray18,
+                  gray19,
+                  gray20,
+                  gray21,
+                  gray22,
+                  gray23,
+                  gray24,
+                  gray25]
+
+```
+@Pyodide.eval
+
+* new color list -> done
++ creating the image -> left to do
++ converting to grayscale -> left to do
++ histogram equalization -> left to do
+- compare the histograms -> left to do
+
+
+  {{1}}
+**************************************************
+
+```python
+colorList = colorList_gray
+pictarray = drawSquares(colorList, pictSize)
+
+fig,ax = plt.subplots()
+cmap = plt.get_cmap('gray')
+plt.imshow(pictarray, norm=None, vmin=0, vmax=255, cmap = cmap)
+plt.show()
+
+plot(fig)
+
+```
+@Pyodide.eval
+
+* new color list -> done
++ creating the image -> done
++ converting to grayscale -> left to do
++ histogram equalization -> left to do
+- compare the histograms -> left to do
+
+**************************************************
+
+  {{2}}
+**************************************************
+
+```python
+gray = rgb2gray(pictarray)
+
+```
+@Pyodide.eval
+
+* new color list -> done
++ creating the image -> done
++ converting to grayscale -> done
++ histogram equalization -> left to do
+- compare the histograms -> left to do
+
+**************************************************
+
+  {{3}}
+**************************************************
+
+```python
+gray_equal = gray.copy()
+gray_equal.fill(255)
+gray_equal = equalhist(gray, gray_equal)
+
+```
+@Pyodide.eval
+
+* new color list -> done
++ creating the image -> done
++ converting to grayscale -> done
++ histogram equalization -> done
+- compare the histograms -> left to do
+
+**************************************************
+
+  {{4}}
+**************************************************
+
+```python
+flatgray = gray.flatten()
+flatequal = gray_equal.flatten()
+
+fig = plt.figure(figsize = (8,6))
+sub1 = fig.add_subplot(2,2,1)
+sub1.hist(flatgray)
+sub1.set_title('Before')
+sub1.set_xlabel('colors')
+sub1.set_ylabel('frequency')
+sub2 = fig.add_subplot(2,2,2)
+sub2.hist(flatequal)
+sub2.set_title('After')
+sub2.set_xlabel('colors')
+
+plot(fig)
+
+```
+@Pyodide.eval
+
+**************************************************
+
 ## More opportunities
 
 Of course, that was a very short introduction to the topic. If you are interested in really dealing with histogram modification I recommend using the Python module "skimage". There you have a lot of filters, histogram modifications and much more, all ready implemented.
 Right now LiaScript is not yet able to include "skimage" or other modules suitable for the topic, like for examle "PIL". If you are interested in the topic, just take a Python editor and try out what the language offers you!  
+
