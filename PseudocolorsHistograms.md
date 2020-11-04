@@ -264,10 +264,10 @@ plot(fig)
 --{{0}}--
 You see that there are more bins in the color image's histogram. By converting into grayscale some of the colors become very similar grayscale values and end up in the same bin.
 
-## Pseudocolors
+## Pseudo colors
 
 --{{0}}--
-Pseudo colors are used to show special aspects of a picture. The easiest way to create some pseudo colors is to plot every color layer separately. But how do we get single color layers?
+Pseudo colors are used to show special aspects of a picture. The easiest way to create some pseudo colors is to plot every color layer separately. But how do we get single color layers? See below.
 
 ```python
 layer0_img = pictarray[:,:,0]
@@ -334,6 +334,7 @@ $s_{k} = (L - 1)\sum_{j=0}^{k} p_{r}r_{j} = \dfrac{L - 1}{MN}\sum_{j=0}^{k}n_{j}
 What do the variables mean?
 | variable | meaning                                |
 |----------|----------------------------------------|
+| $s_{k}$  | the new color value                    |
 | $L$      | amount of occurring colors             |
 | $p_{r}$  | their probability of occurrence        |
 | $r_{j}$  | a single color                         |
@@ -341,9 +342,11 @@ What do the variables mean?
 | $N$      | picture's column dimension             |
 | $n_{i}$  | total count of pixels of one color     |
 
-source of formula: Gonzalez, Woods: Digital Image Processing. Third Edition. PHI Learning Private Limited. New Delhi 2008, page 126
+source for formula: Gonzalez, Woods: Digital Image Processing. Third Edition. PHI Learning Private Limited. New Delhi 2008, page 126
 
 #### Function for histogram equalization
+
+... just an implementation of the formula.
 
 ```python
 
@@ -430,7 +433,7 @@ plot(fig)
 @Pyodide.eval
 
 --{{0}}--
-Now we see that the colors are more equally distributed. In fact that works better with a picture that has more than the colors from our list.
+Now we see that the colors are not equally distributed. That is not a problem of the formula, it is a problem of the image consisting of so few colors. In fact that works better with a picture that has at least an amount of 30 colors which occur in a kind of Gaussian distribution.
 
 ### Histogram spreading
 
@@ -567,7 +570,7 @@ flatspread = gray_spread.flatten()
   {{1}}
 **************************************************
 --{{1}}--
-You see that histogram spreading works fine while equalization does not really what we imagined. But that is no problem of the function but of our picture only consisting of few colors.
+You see that histogram spreading works fine while equalization does not really do what we imagined. That is no problem of the function but of our picture only consisting of few colors.
 
 ```python
 
