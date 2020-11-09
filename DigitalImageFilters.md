@@ -219,8 +219,7 @@ We have to bind in another module. If you already know that process will take to
 ```python
 from scipy import misc
 
-pict = misc.face()
-gray = rgb2gray(pict)
+gray = misc.face(gray = True)
 
 ```
 @Pyodide.eval
@@ -1476,10 +1475,10 @@ sub1.imshow(gray, cmap = cmap)
 sub1.set_title('Original grayscale')
 sub2 = plt.subplot(3, 3, 2)
 sub2.imshow(newpict, cmap = cmap)
-sub1.set_title('Average blurred')
+sub2.set_title('Average blurred')
 sub3 = plt.subplot(3, 3, 3)
 sub3.imshow(masked, cmap = cmap)
-sub1.set_title('Unsharp masked')
+sub3.set_title('Unsharp masked')
 
 plt.show()
 plot(fig)
