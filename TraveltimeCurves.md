@@ -158,6 +158,8 @@ What parts of the underground do we meet?
 + diffraction point 2 -> ???
 - part III -> ???
 
+
+
   {{1}}
 **************************************************
 
@@ -458,7 +460,6 @@ plot(fig)
 ### Diffraction point 2
 
 ```python
-
 x4 = np.linspace(0, 3000, 3000, endpoint = True)
 t4 = diffraction(x4, x_shot, x_diff2, h2, v)
 
