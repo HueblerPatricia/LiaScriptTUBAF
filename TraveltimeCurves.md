@@ -551,6 +551,60 @@ plot(fig)
 
 **************************************************
 
+### Travel time diagram including a direct wave
+
+```python
+
+def direct(x, x_shot, v):
+
+    '''
+    travel times for direct wave
+
+    Parameters:
+        x(array 1D)     : x positions of geophones
+        x_schuss(number): x position of source
+        v(number)       : velocity in upper layer
+
+    Returns:
+        t(array 1D): travel times
+    '''
+
+    abs_x = abs(x_shot - x)
+    t = abs_x / v
+    return t
+
+
+xdirect = np.linspace(0, 3000, 3000, endpoint = True)
+tdirect = direct(xdirect, x_shot, v)
+
+```
+@Pyodide.eval
+
+
+{{1}}
+**************************************************
+
+```python
+fig, ax = plt.subplots()
+plt.gca().invert_yaxis()
+plt.plot( xdirect, tdirect, color = 'gray', label = "direct wave" )
+plt.plot( x1, t1, color = 'cornflowerblue', label = "part I" )
+plt.plot( x3, t3, color = 'mediumblue', label = "part II" )
+plt.plot( x2, t2, color = 'coral', label = "diffraction point 1" )
+plt.plot( x4, t4, color = 'peru', label = "diffraction point 2" )
+plt.legend()
+plt.ylim(2.5,0)
+plt.xlim(0,3000)
+plt.ylabel("t [s]")
+plt.xlabel("x [m]")
+plt.title("Seismic travel times")
+plt.show()
+
+plot(fig)
+```
+@Pyodide.eval
+
+**************************************************
 
 ### Other seismic travel times
 
