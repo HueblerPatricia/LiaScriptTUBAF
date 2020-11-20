@@ -219,16 +219,11 @@ def rgb2gray(rgb):
   {{1}}
 ***************************************************
 
-Now the computation:
+Now the computation and a plot:
 
 ```python
 gray = rgb2gray(pictarray)
-```
-@Pyodide.eval
 
-### Look at "gray"
-
-```python
 fig, ax = plt.subplots()
 plt.imshow(gray, cmap = plt.get_cmap('gray'))
 plt.show()
