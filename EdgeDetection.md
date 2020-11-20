@@ -20,8 +20,7 @@ See on LiaScript:
 
 https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/EdgeDetection.md
 
-## Preparations
-Import necessary modules
+## Preparations - import Python modules
 
 ```python
 import numpy as np                #working with arrays
@@ -30,8 +29,6 @@ import matplotlib.pyplot as plt   #plot an image
 ```
 @Pyodide.eval
 
---{{0}}--
-First we need to bind in some Python modules.
 
 What are the modules for?
 | module            | content                                    |
