@@ -242,39 +242,94 @@ For theory of linear filters see
 
 https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalImageFilters.md
 
-### Implementation of linear filtering
+Here just in short.
 
-formula:
+For more explanation, see:
+
+https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalImageFilters.md
+
+  {{1}}
+***************************************************
+
+Convolution:
+
 $new value = \dfrac{1}{m\cdot n}\cdot\sum_{i=1,j=1}^{m,n} value picture[i][j]\cdot value kernel[i][j] $
+
 
 ```python
 def convolve(kernel,pictpart):
 
-    '''Performs a convolution in 2D
-
-      does a pointwise multiplication of "kernel" and "pictpart" and computes the sum over the result
+    '''convolution in 2D
 
     Parameters
     ----------
-    kernel : 2D array
-        the filter mask
-    pictpart : 2D
-        the actual part of the picture to be convolved
+    kernel : 2D array of numbers
+       the filter mask to use
+
+    pictpart : 2D array of numbers
+       currently active part of the picture
+
 
     Returns
     -------
     float
-        the sum over the multiplication's result
+       the new color value
     '''
 
     s = 0.0
-    temporal_array = np.multiply(kernel,pictpart)
-    s = sum(temporal_array)
+    temparr=np.multiply(kernel,pictpart)
+    s = sum(temparr)
     s = sum(s)
     return s
 
 ```
 @Pyodide.eval
+
+***************************************************
+
+  {{2}}
+***************************************************
+
+Filtering:
+
+```python
+def filter_image(pict, kernel):
+
+    '''image filtering
+
+    Parameters
+    ----------
+    pict : 2D array of numbers
+       an image of grayscale values
+
+    kernel : 2D array of numbers
+       the filter mask to use
+
+    Returns
+    -------
+    2D array
+       the modified grayscale image
+    '''
+
+    newpict = pict[0:][0:].copy()
+    newpict.fill(0)
+
+    pictpart = kernel.copy()
+    pictpart.fill(0)
+
+    for i in range(0+(kernel.shape[0]//2),  len(pict)-(kernel.shape[0])):
+        for j in range(0+(kernel.shape[1]//2),  len(pict[1])-(kernel.shape[1])):
+
+            for k in range(0,  (kernel.shape[0])):
+                for l in range(0,  (kernel.shape[1])):
+                    pictpart[k][l]=pict[i+k][j+l]
+            newpict[i+(kernel.shape[0]//2)][j+(kernel.shape[1]//2)]=convolve(kernel, pictpart)
+    return newpict
+
+```
+@Pyodide.eval
+
+***************************************************
 
 ### Filter masks for edge detection - theory
 
@@ -370,94 +425,6 @@ roberts_135 = np.array([[-1,0],[0,1]], dtype = float)
 
 ```
 @Pyodide.eval
-
-### Functions for filter process
-
-Here just in short.
-
-For more explanation, see:
-
-https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalImageFilters.md
-
-  {{1}}
-***************************************************
-
-Convolution:
-
-```python
-def convolve(kernel,pictpart):
-
-    '''convolution in 2D
-
-    Parameters
-    ----------
-    kernel : 2D array of numbers
-       the filter mask to use
-
-    pictpart : 2D array of numbers
-       currently active part of the picture
-
-
-    Returns
-    -------
-    float
-       the new color value
-    '''
-
-    s = 0.0
-    temparr=np.multiply(kernel,pictpart)
-    s = sum(temparr)
-    s = sum(s)
-    return s
-
-```
-@Pyodide.eval
-
-***************************************************
-
-  {{2}}
-***************************************************
-
-Filtering:
-
-```python
-def filter_image(pict, kernel):
-
-    '''image filtering
-
-    Parameters
-    ----------
-    pict : 2D array of numbers
-       an image of grayscale values
-
-    kernel : 2D array of numbers
-       the filter mask to use
-
-    Returns
-    -------
-    2D array
-       the modified grayscale image
-    '''
-
-    newpict = pict[0:][0:].copy()
-    newpict.fill(0)
-
-    pictpart = kernel.copy()
-    pictpart.fill(0)
-
-    for i in range(0+(kernel.shape[0]//2),  len(pict)-(kernel.shape[0])):
-        for j in range(0+(kernel.shape[1]//2),  len(pict[1])-(kernel.shape[1])):
-
-            for k in range(0,  (kernel.shape[0])):
-                for l in range(0,  (kernel.shape[1])):
-                    pictpart[k][l]=pict[i+k][j+l]
-            newpict[i+(kernel.shape[0]//2)][j+(kernel.shape[1]//2)]=convolve(kernel, pictpart)
-    return newpict
-
-```
-@Pyodide.eval
-
-***************************************************
 
 ### Results of Prewitt filter masks
 
