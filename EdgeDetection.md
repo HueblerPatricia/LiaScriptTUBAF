@@ -713,3 +713,8 @@ Edge detection is useful for seeing shapes in CT images, for example, but also i
 Is is easily possible to increase or decrease strength of the gradient or change to a certain direction that is interesting.
 
 Is is also possible to change the size of the filter mask, that will give you only wider edges, not the smallest ones.
+
+You can also take the edges and combine them with any result of filtering. For example, you first take the edges and only blur them or the other way around: You take the edges, blur the rest and add the original edges back onto the picture.
+
+> There are many opportunities to use image filters and edge detection. Just try out, if you are interested! 
+
