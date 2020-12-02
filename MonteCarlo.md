@@ -22,11 +22,11 @@ https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPat
 ## Preparations
 Import necessary modules
 
-```python
+```python           
+import random 
 import numpy as np               
 import matplotlib.pyplot as plt  
-from scipy import sqrt            
-import random                    
+from scipy import sqrt                    
 
 ```
 @Pyodide.eval
