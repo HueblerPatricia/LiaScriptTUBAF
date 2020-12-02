@@ -22,11 +22,10 @@ https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPat
 ## Preparations
 Import necessary modules
 
-```python           
-import random 
+```python
 import numpy as np               
 import matplotlib.pyplot as plt  
-from scipy import sqrt                    
+from scipy import sqrt                   
 
 ```
 @Pyodide.eval
@@ -134,12 +133,12 @@ def rand_points_square(n,a,b):
     '''
 
 
-    random.seed()
+    np.random.seed()
     list_x = list()
     list_y = list()
     for i in range(0,n):
-        x = random.random() * b
-        y = random.random() * b
+        x = np.random.random() * b
+        y = np.random.random() * b
         list_x.append(x)
         list_y.append(y)
     points_x = np.asarray(list_x)
