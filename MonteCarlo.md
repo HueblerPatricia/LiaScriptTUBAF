@@ -95,7 +95,6 @@ def circle_func(x):
 Define the circle's radius and some x and y values for drawing.
 
 ```python
-
 r = 1
 x1 = np.linspace( 0, r, 100 )
 f1 = circle_func(x1)
@@ -113,7 +112,6 @@ f1 = circle_func(x1)
 Function to find random points in a square.
 
 ```python
-
 def rand_points_square(n,a,b):
 
     '''gives random points in 2D
@@ -172,8 +170,7 @@ Here we see how Monte Carlo integration works. We have an amount of randomly sca
 An illustration of the Monte Carlo integration method.
 
 ```python
-fig, ax = plt.subplots()
-plt.figure(figsize = (5,5))
+fig, ax = plt.subplots(figsize = (5,5))
 plt.plot(x1,f1)
 plt.scatter(points_x, points_y, s = 10, color = 'blue', marker = ".")
 plt.xlim(0,r)
@@ -199,7 +196,6 @@ plot(fig)
 A function to do that counting for us.
 
 ```python
-
 def counts_under_graph(x,y,func):
 
     '''counts points under graph
@@ -238,7 +234,6 @@ def counts_under_graph(x,y,func):
 Execute it.
 
 ```python
-
 counts = counts_under_graph(points_x, points_y, circle_func)
 print(counts)
 
@@ -252,7 +247,6 @@ print(counts)
 $ \dfrac{surface}{entire} = \dfrac{counts}{n} \Leftrightarrow  surface = \dfrac{entire\cdot counts}{n}$
 
 ```python
-
 entire = b**2
 surface = (entire*counts)/n
 print(surface)
@@ -269,14 +263,14 @@ We have a circle's fourth, so ...
 $ \pi = \dfrac{4\cdot surface}{r^2} $
 
 
-{{1}}
+
+  {{1}}
 **********************************************************
 
---{{1}}-
+--{{1}}--
 The error is quite large at the moment. To reduce it we can only increase n. For that we define a function for the whole approximation process in the next step.
 
 ```python
-
 pi_approx = (4*surface)/(r**2)
 difference = abs(np.pi - pi_approx)
 
@@ -286,7 +280,9 @@ print("Error: ", difference)
 ```
 @Pyodide.eval
 
+
 **********************************************************
+
 
 ## Function for approximation
 
@@ -359,7 +355,6 @@ n_array = np.asarray(n_list)
 diff_array = np.asarray(diff_list)
 
 fig, ax = plt.subplots()
-plt.figure()
 plt.plot(n_array, diff_array)
 plt.xlabel("number of random points")
 plt.ylabel("error")
