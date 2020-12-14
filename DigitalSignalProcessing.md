@@ -528,6 +528,8 @@ plot(fig)
 ```
 @Pyodide.eval
 
+****************************************************************
+
 ### The correlation
 
 $\Rightarrow $ compare the data with the original emitted sweep which you know
@@ -547,8 +549,12 @@ plot(fig)
 ```
 @Pyodide.eval
 
+--{{0}}--
+The correlation maxima are exactly located at the points in time, where a new reflected sweep starts.
+
 ## Some annotations
 
 This was just a very brief introduction into some basic processes of digital signal processing. There is much more that you may do using Python modules.
 You may try out some other filters and parameters. They may also be used, for example, in acoustics.
+
 And I can recommend to read and understand how FFT works, because that is important in many fields of application. FFT can, for example, also be used for digital image processing to "cut out" some noise.
