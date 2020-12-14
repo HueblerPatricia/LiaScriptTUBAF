@@ -17,6 +17,10 @@ literature for this chapter:
 
 José Unpingco: Python for Signal Processing. Featuring IPython Notebooks. Springer International Publishing, Switzerland 2014
 
+See on LiaScript:
+
+https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalSignalProcessing.md
+
 ## Python modules
 
 --{{0}}--
