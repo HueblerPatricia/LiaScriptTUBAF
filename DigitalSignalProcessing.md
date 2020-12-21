@@ -17,6 +17,8 @@ literature for this chapter:
 
 * Steven W. Smith: The Scientist's and Engineer's Guide to Digital Signal Processing. Second Edition. California Technical Publishing, USA 1997 - 1999
 - http://iowahills.com/
+
+
 See on LiaScript:
 
 https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalSignalProcessing.md
