@@ -169,6 +169,8 @@ plot(fig)
 ```
 @Pyodide.eval
 
+> **Remark:** If the sweep looks a bit frayed, that is a sampling problem (see sampling theorem). You may change the sample rate if you want.
+
 ## FFT : Fast Fourier Transformation
 
 "Fourier analysis converts a signal from its original domain (often time [...]) to a representation in the frequency domain [...]"
@@ -199,28 +201,29 @@ sweep_fftfreq = fp.fftfreq(len(sweep_abs_fft), 1/sampleRate)
 **Plots**
 
 ```python
-fig, ax = plt.subplots(3,1, figsize = (12,12))
+fig, ax = plt.subplots(3,1, figsize = (10,10))
 i = sin_fftfreq > 0
+fny = 0.5 * samplerate
 
 ax[0].plot(sin_fftfreq[i], sin_abs_fft[i], lw = .7)
 ax[0].set_title("Spectrum of sine signal")
 ax[0].set_xlabel('frequency [Hz]')
 ax[0].set_ylabel('amplitude')
-ax[0].set_xlim(0,500)
+ax[0].set_xlim(0,fny)
 ax[0].grid()
 
 ax[1].plot(sq_fftfreq[i], sq_abs_fft[i], lw = .7)
 ax[1].set_title("Spectrum of square-wave signal")
 ax[1].set_xlabel('frequency [Hz]')
 ax[1].set_ylabel('amplitude')
-ax[1].set_xlim(0,500)
+ax[1].set_xlim(0,fny)
 ax[1].grid()
 
 ax[2].plot(sweep_fftfreq[i], sweep_abs_fft[i], lw = .7)
 ax[2].set_title("Spectrum of sweep")
 ax[2].set_xlabel('frequency [Hz]')
 ax[2].set_ylabel('amplitude')
-ax[2].set_xlim(0,500)
+ax[2].set_xlim(0,fny)
 ax[2].grid()
 
 plt.subplots_adjust(hspace=0.4)
@@ -244,7 +247,7 @@ What to do?
 ### Create the time series
 
 ```python
-sampleRate = sampleRates[5]
+sampleRate = sampleRates[3]
 endTime = 1   #seconds
 
 frqSine = 20
@@ -281,7 +284,7 @@ sg_fftfreq = fp.fftfreq(len(sg_abs_fft), 1/sampleRate)
 In frequency domain we clearly see two parted frequencies. One is the signal, the other is the noise.
 
 ```python
-fig = plt.figure(figsize = (12,8))
+fig = plt.figure(figsize = (8,6))
 i = sin_fftfreq > 0
 sub1 = fig.add_subplot(2,2,1)
 sub1.plot(t, sgSine)
@@ -323,7 +326,7 @@ highpass_demo = [[0, 10, 20, 80], [0, 0, 1, 1]]
 bandpass_demo = [[0, 10, 15, 25, 30, 80], [0, 0, 1, 1, 0, 0]]
 notch_demo = [[0, 45, 50, 55, 80], [1, 1, 0, 1, 1]]
 
-fig = plt.figure(figsize = (12,8))
+fig = plt.figure(figsize = (8,6))
 i = sin_fftfreq > 0
 sub1 = fig.add_subplot(2,2,1)
 sub1.plot(sg_fftfreq[i], sg_abs_fft[i], color = 'black')
@@ -418,7 +421,7 @@ filtered_notch = sg.lfilter(b, a, sgSum)
 
 **Create filter coefficients**
 
-For real applications use, for example, *PYFDA* (https://github.com/chipmuenk/pyfda) to create filter coefficients.
+For real applications use, for example, *pyFDA* (https://github.com/chipmuenk/pyfda) to create filter coefficients.
 Here it is done by designing a rectangular window and do FFT over it (as done in modul "Zeitreihenanalyse", TU Bergakademie Freiberg, Freiberg, summer semester 2019).
 
 ```python
@@ -496,7 +499,7 @@ i = filtFrq > 0
 We eliminated the disturbing frequency and kept our original signal. You may play around with the filter's settings to see some differences.
 
 ```python
-fig2, ax = plt.subplots(4, 1, figsize=(12, 15))
+fig2, ax = plt.subplots(4, 1, figsize=(8, 10))
 
 ax[0].plot(c2, label='Coefficients', lw=0.5)
 ax[0].set_title("Coefficients")
@@ -531,7 +534,7 @@ Following situation to imagine: You have field measurements from Vibroseis Truck
 
 Just execute the code and have a look at the resulting data!
 
-**Original sweep emitted by Vibroseis Truck**
+**Original sweep emitted by (imaginary) Vibroseis Truck**
 
 ```python
 endTime = 3 #seconds
@@ -617,9 +620,16 @@ plot(fig)
 ```
 @Pyodide.eval
 
+
+
+****************************************************************
+
 ### The correlation
 
 $\Rightarrow $ compare the data with the original emitted sweep which you know
+
+
+You see, the peaks are exactly located where *t1*, *t2* and *t3* (the starting times of each single reflection) were defined.
 
 ```python
 corr = np.correlate(sgSum, sgSweep, "valid")
@@ -639,5 +649,7 @@ plot(fig)
 ## Some annotations
 
 This was just a very brief introduction into some basic processes of digital signal processing. There is much more that you may do using Python modules.
+
 You may try out some other filters and parameters (Butterworth, Notch etc.). They may also be used, for example, in acoustics.
+
 And I can recommend to read and understand how FFT works, because that is important in many fields of application. FFT can, for example, also be used for digital image processing to "cut out" some noise.
