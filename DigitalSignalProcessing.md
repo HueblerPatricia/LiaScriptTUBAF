@@ -31,7 +31,7 @@ First we bind in some Python modules.
 ```python
 import numpy as np
 import scipy as sp
-#import scipy.signal as sg #does not work in LiaScript (yet)
+import scipy.signal as sg #does not completely work in LiaScript (yet)
 import scipy.fftpack as fp
 import matplotlib.pyplot as plt
 ```
@@ -53,7 +53,7 @@ What are the modules for?
 "The sampling theorem indicates that a continuous signal can be properly sampled, only if it does not contain frequency components above one-half of the sampling rate." *- The Scientist's and Engineer's Guide to Digital Signal Processing, page 40*
 
 Therefor the **Nyquist frequency** or **Nyquist rate** is defined. In *"The Scientist's and Engineer's Guide to Digital Signal Processing"* it is defined as
-$f_{Ny} = 0.5\cdot sample\quad rate = \dfrac{1}{2\Delta t}$
+$f_{Ny} = 0.5\cdot sample rate = \dfrac{1}{2\Delta t}$
 
 > "The digital signal cannot contain frequencies above one-half the sampling rate." - The Scientist's and Engineer's Guide to Digital Signal Processing, page 42 
 
