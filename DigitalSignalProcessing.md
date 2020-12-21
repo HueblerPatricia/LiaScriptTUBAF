@@ -55,7 +55,7 @@ What are the modules for?
 Therefor the **Nyquist frequency** or **Nyquist rate** is defined. In *"The Scientist's and Engineer's Guide to Digital Signal Processing"* it is defined as
 $f_{Ny} = 0.5\cdot sample\quad rate = \dfrac{1}{2\Delta t}$
 
-> **"The digital signal cannot contain frequencies above one-half the sampling rate." - The Scientist's and Engineer's Guide to Digital Signal Processing, page 42 **
+> "The digital signal cannot contain frequencies above one-half the sampling rate." - The Scientist's and Engineer's Guide to Digital Signal Processing, page 42 
 
 **In easy words:** Let's assume you have a signal containing frequencies lower or equal 50 Hz. Then you have to choose your sample rate minimum 100 Hz.
 
