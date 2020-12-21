@@ -15,8 +15,8 @@ import:  https://github.com/LiaTemplates/Pyodide
 
 literature for this chapter:
 
-José Unpingco: Python for Signal Processing. Featuring IPython Notebooks. Springer International Publishing, Switzerland 2014
-
+* Steven W. Smith: The Scientist's and Engineer's Guide to Digital Signal Processing. Second Edition. California Technical Publishing, USA 1997 - 1999
+- http://iowahills.com/
 See on LiaScript:
 
 https://liascript.github.io/course/?https://raw.githubusercontent.com/HueblerPatricia/LiaScriptTUBAF/main/DigitalSignalProcessing.md
@@ -29,8 +29,8 @@ First we bind in some Python modules.
 ```python
 import numpy as np
 import scipy as sp
-import scipy.signal as sg
-import scipy.fftpack
+#import scipy.signal as sg #does not work in LiaScript (yet)
+import scipy.fftpack as fp
 import matplotlib.pyplot as plt
 ```
 @Pyodide.eval
@@ -44,16 +44,31 @@ What are the modules for?
 | SciPy.fftpack     | (fast) fourier transformation              |
 | Matplotlib.Pyplot | plotting images and referred settings      |
 
+## The sampling theorem
+
+"If you can exactly reconstruct the analog signal from the samples, you must have done the sampling properly." *- The Scientist's and Engineer's Guide to Digital Signal Processing, page 39*
+
+"The sampling theorem indicates that a continuous signal can be properly sampled, only if it does not contain frequency components above one-half of the sampling rate." *- The Scientist's and Engineer's Guide to Digital Signal Processing, page 40*
+
+Therefor the **Nyquist frequency** or **Nyquist rate** is defined. In *"The Scientist's and Engineer's Guide to Digital Signal Processing"* it is defined as
+$f_{Ny} = 0.5\cdot sample\quad rate = \dfrac{1}{2\Delta t}$
+
+> **"The digital signal cannot contain frequencies above one-half the sampling rate." - The Scientist's and Engineer's Guide to Digital Signal Processing, page 42 **
+
+**In easy words:** Let's assume you have a signal containing frequencies lower or equal 50 Hz. Then you have to choose your sample rate minimum 100 Hz.
+
+Keep that in mind! You will need it often in signal processing although it is not that important for this example chapter.
+
 ## Some sample rates to choose from
 
   --{{0}}--
 We will use this sample rate through the whole chapter.
 
 ```python
-#index      =   0    1     2     3     4      5       6       7       8
-sampleRates = (250, 500, 1000, 5000, 10000, 50000, 100000, 500000, 1000000)
+#index      =   0    1    2    3     4    
+sampleRates = (250, 300, 400, 500, 1000)
 
-sampleRate = sampleRates[5] #Hz
+sampleRate = sampleRates[3] #Hz
 
 ```
 @Pyodide.eval
@@ -160,17 +175,17 @@ source: https://en.wikipedia.org/wiki/Fast_Fourier_transform
 So let's do an FFT for all of our 3 signals!
 
 ```python
-sin_fft = sp.fftpack.fft(sgSine)
+sin_fft = fp.fft(sgSine)
 sin_abs_fft = 2 * np.abs(sin_fft)/(len(sgSine))
-sin_fftfreq = sp.fftpack.fftfreq(len(sin_abs_fft), 1/sampleRate)
+sin_fftfreq = fp.fftfreq(len(sin_abs_fft), 1/sampleRate)
 
-sq_fft = sp.fftpack.fft(sgSquare)
+sq_fft = fp.fft(sgSquare)
 sq_abs_fft = 2 * np.abs(sq_fft)/(len(sgSquare))
-sq_fftfreq = sp.fftpack.fftfreq(len(sq_abs_fft), 1/sampleRate)
+sq_fftfreq = fp.fftfreq(len(sq_abs_fft), 1/sampleRate)
 
-sweep_fft = sp.fftpack.fft(sgSweep)
+sweep_fft = fp.fft(sgSweep)
 sweep_abs_fft = 2 * np.abs(sweep_fft)/(len(sgSweep))
-sweep_fftfreq = sp.fftpack.fftfreq(len(sweep_abs_fft), 1/sampleRate)
+sweep_fftfreq = fp.fftfreq(len(sweep_abs_fft), 1/sampleRate)
 
 ```
 @Pyodide.eval
@@ -249,13 +264,13 @@ sgSum = sgSine + sgNoise
 ### FFT and plot
 
 ```python
-sin_fft = sp.fftpack.fft(sgSine)
+sin_fft = fp.fft(sgSine)
 sin_abs_fft = 2 * np.abs(sin_fft)/(len(sgSine))
-sin_fftfreq = sp.fftpack.fftfreq(len(sin_abs_fft), 1/sampleRate)
+sin_fftfreq = fp.fftfreq(len(sin_abs_fft), 1/sampleRate)
 
-sg_fft = sp.fftpack.fft(sgSum)
+sg_fft = fp.fft(sgSum)
 sg_abs_fft = 2 * np.abs(sg_fft)/(len(sgSum))
-sg_fftfreq = sp.fftpack.fftfreq(len(sg_abs_fft), 1/sampleRate)
+sg_fftfreq = fp.fftfreq(len(sg_abs_fft), 1/sampleRate)
 
 ```
 @Pyodide.eval
@@ -349,11 +364,12 @@ plot(fig)
 **Some annotations**
 
 * The only one we can't use here is the highpass, because it would not mute the noise and keep the signal.
-- In this simple example most of the other 3 filters types will give the same nearly perfect result.
++ In this simple example most of the other 3 filters types will give the same nearly perfect result.
+- Here we will only deal with a lowpass filter, because it is easiest to implement it ourselves. (LiaScript unfortunately does not understand *SciPy.signal* (yet), so we can't use ready made filters.)
 
 ****************************************************************
 
-### Filtering
+### Filtering in SciPy.signal
 
 **Lowpass filtering**
 
@@ -364,7 +380,6 @@ low = sg.butter(N, Wn, 'lowpass', fs=sampleRate, output='sos') # use a butterwor
 filtered_low = sg.sosfilt(low, sgSum)
 
 ```
-@Pyodide.eval
 
 
 {{1}}
@@ -379,7 +394,6 @@ band = sg.butter(N, Wn , 'bandpass', fs=sampleRate, output='sos') # use a butter
 filtered_band = sg.sosfilt(band, sgSum)
 
 ```
-@Pyodide.eval
 
 ****************************************************************
 
@@ -395,38 +409,111 @@ b, a = sg.iirnotch(frq_to_filt, Q , fs=sampleRate) # a notch filter
 filtered_notch = sg.lfilter(b, a, sgSum)
 
 ```
+
+****************************************************************
+
+### An easy (and very unrealistic) implementation of lowpass filters
+
+**Create filter coefficients**
+
+For real applications use, for example, *PYFDA* (https://github.com/chipmuenk/pyfda) to create filter coefficients.
+Here it is done by designing a rectangular window and do FFT over it (as done in modul "Zeitreihenanalyse", TU Bergakademie Freiberg, Freiberg, summer semester 2019).
+
+```python
+def genCoeffsLowP( numTaps, fc, fs ):
+    '''
+    Creating a field of coefficients for FIR lowpass filter.
+    No usage of window function, frequency response is chopped down.
+
+    Parameters
+    ----------
+    numTaps : int
+        number of coefficients to be created
+    fc : double
+        the filter's base frequency
+    fs : double
+        used sample rate
+
+    Returns
+    -------
+    rv : ndarray
+        field with filter coefficients
+
+    '''
+
+    fr = fc/fs
+
+    c = np.zeros( numTaps )
+    end = int(numTaps * fr)
+
+    for i in range(0,end+1):
+        c[i] = 1
+
+    c_fft = np.fft.fft(c).real
+
+    rv_1 = c_fft[len(c_fft)//2:]
+    rv_2 = c_fft[0:len(c_fft)//2]
+    rv = np.hstack((rv_1, rv_2))
+
+    # normalization
+    factor = sum(rv)
+    factor /= 2
+    rv /= factor
+
+    return rv
+
+```
 @Pyodide.eval
+
+{{1}}
+****************************************************************
+
+**Apply filter**
+**... and do some other computations to compare before and after**
+
+```python
+c2 = genCoeffsLowP( 40, fc=35, fs=sampleRate )
+
+sgFiltered = np.convolve( sgSum, c2  )
+
+temp_fft = fp.fft(sgFiltered)
+filtAbs = np.abs(temp_fft)
+filtAbs /= (len(filtAbs)/2)
+filtFrq = fp.fftfreq(len(filtAbs), 1/sampleRate)
+i = filtFrq > 0
+
+```
+@Pyodide.eval
+
 
 ****************************************************************
 
 ### Results of filtering
 
 --{{0}}--
-With all three filters we eliminated the disturbing frequency and kept our original signal. You may play around with the filter's settings to see some diferences.
+We eliminated the disturbing frequency and kept our original signal. You may play around with the filter's settings to see some differences.
 
 ```python
-fig = plt.figure(figsize = (12,8))
-sub1 = fig.add_subplot(2,2,1)
-sub1.plot(t, sgSum)
-sub1.set_title('Before')
-sub1.set_xlabel('time [s]')
-sub1.set_ylabel('amplitude')
-sub2 = fig.add_subplot(2,2,2)
-sub2.plot(t, filtered_low)
-sub2.set_title('Lowpass filter applied')
-sub2.set_xlabel('time [s]')
-sub3 = fig.add_subplot(2,2,3)
-sub3.plot(t, filtered_band)
-sub3.set_title('Bandpass filter applied')
-sub3.set_xlabel('time [s]')
-sub4 = fig.add_subplot(2,2,4)
-sub4.plot(t, filtered_notch)
-sub4.set_title('Notch filter applied')
-sub4.set_xlabel('time [s]')
+fig2, ax = plt.subplots(4, 1, figsize=(12, 15))
+
+ax[0].plot(c2, label='Coefficients', lw=0.5)
+ax[0].set_title("Coefficients")
+ax[0].grid()
+
+ax[1].plot(sgSum , label='Input signal', lw=0.5)
+ax[1].set_title("Input signal")
+
+ax[2].plot(sgFiltered , label='filtered', lw=0.5)
+ax[2].set_title("Lowpass applied")
+
+ax[3].plot(filtFrq[i],filtAbs[i] , label='filtered', lw=0.8)
+ax[3].set_title("FFT of filtered signal")
+ax[3].set_xlim(0,100)
+
 plt.subplots_adjust(hspace=0.4)
 plt.show()
 
-plot(fig)
+plot(fig2)
 
 ```
 @Pyodide.eval
@@ -528,8 +615,6 @@ plot(fig)
 ```
 @Pyodide.eval
 
-****************************************************************
-
 ### The correlation
 
 $\Rightarrow $ compare the data with the original emitted sweep which you know
@@ -549,12 +634,8 @@ plot(fig)
 ```
 @Pyodide.eval
 
---{{0}}--
-The correlation maxima are exactly located at the points in time, where a new reflected sweep starts.
-
 ## Some annotations
 
 This was just a very brief introduction into some basic processes of digital signal processing. There is much more that you may do using Python modules.
-You may try out some other filters and parameters. They may also be used, for example, in acoustics.
-
+You may try out some other filters and parameters (Butterworth, Notch etc.). They may also be used, for example, in acoustics.
 And I can recommend to read and understand how FFT works, because that is important in many fields of application. FFT can, for example, also be used for digital image processing to "cut out" some noise.
